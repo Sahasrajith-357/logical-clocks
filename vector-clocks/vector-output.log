@@ -1,0 +1,23 @@
+Final event log:
+P3  clock=[0 0 1]  internal 	 boot
+P1  clock=[1 0 0]  internal 	 boot
+P1  clock=[2 0 0]  send 	 "hello P2, I am P1" -> P2
+P1  clock=[3 0 0]  internal 	 processing
+P2  clock=[0 1 0]  internal 	 boot
+P3  clock=[4 0 2]  receive 	 "hello P3, I am P1" from P1
+P2  clock=[2 2 0]  receive 	 "hello P2, I am P1" from P1
+P2  clock=[2 3 0]  internal 	 processing
+P2  clock=[2 4 0]  send 	 "hello P3, I am P2" -> P3
+P2  clock=[2 5 0]  internal 	 shutting down
+P3  clock=[4 4 3]  receive 	 "hello P3, I am P2" from P2
+P3  clock=[4 4 4]  internal 	 processing
+P3  clock=[4 4 5]  send 	 "hello P2, I am P3" -> P2
+P3  clock=[4 4 6]  internal 	 shutting down
+P1  clock=[4 0 0]  send 	 "hello P3, I am P1" -> P3
+P1  clock=[5 0 0]  internal 	 shutting down
+
+Concurrent relationship:
+boot vs processing: a || b (concurrent)
+
+Causal relationship:
+send vs receive: a -> b (a happens before b)
