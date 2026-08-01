@@ -1,0 +1,35 @@
+Final event log:
+P3  clock=1  internal 	 boot
+P1  clock=1  internal 	 boot
+P1  clock=2  send 	 "hello P2, I am P1" -> P2
+P1  clock=3  internal 	 processing
+P1  clock=4  send 	 "hello P3, I am P1" -> P3
+P1  clock=5  internal 	 shutting down
+P3  clock=5  receive 	 "hello P3, I am P1" from P1
+P2  clock=1  internal 	 boot
+P2  clock=3  receive 	 "hello P2, I am P1" from P1
+P2  clock=4  internal 	 processing
+P2  clock=5  send 	 "hello P3, I am P2" -> P3
+P2  clock=6  internal 	 shutting down
+P3  clock=6  receive 	 "hello P3, I am P2" from P2
+P3  clock=7  internal 	 processing
+P3  clock=8  send 	 "hello P2, I am P3" -> P2
+P3  clock=9  internal 	 shutting down
+
+Final event log (sorted by Lamport clocks):
+P1  clock=1  internal 	 boot
+P2  clock=1  internal 	 boot
+P3  clock=1  internal 	 boot
+P1  clock=2  send 	 "hello P2, I am P1" -> P2
+P1  clock=3  internal 	 processing
+P2  clock=3  receive 	 "hello P2, I am P1" from P1
+P1  clock=4  send 	 "hello P3, I am P1" -> P3
+P2  clock=4  internal 	 processing
+P1  clock=5  internal 	 shutting down
+P2  clock=5  send 	 "hello P3, I am P2" -> P3
+P3  clock=5  receive 	 "hello P3, I am P1" from P1
+P2  clock=6  internal 	 shutting down
+P3  clock=6  receive 	 "hello P3, I am P2" from P2
+P3  clock=7  internal 	 processing
+P3  clock=8  send 	 "hello P2, I am P3" -> P2
+P3  clock=9  internal 	 shutting down
